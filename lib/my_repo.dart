@@ -11,4 +11,9 @@ class MyRepo {
             User.fromJson(singleUserDataFromJson.toJson()))
         .toList();
   }
+
+  Future<User> getUserById(int userId) async {
+    var response = await webServices.getUserById(userId);
+    return User.fromJson(response.toJson());
+  }
 }
