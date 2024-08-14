@@ -19,22 +19,23 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // BlocProvider.of<MyCubit>(context).emitGetAllUsers(usersList);
     // BlocProvider.of<MyCubit>(context).emitGetUserDetails(7281366);
+    // BlocProvider.of<MyCubit>(context).emitCreateNewUser(
+    //   User(
+    //     name: 'Ahmed Mohamed',
+    //     email: 'Ahmed.mohamed@gmail.com',
+    //     status: 'active',
+    //     gender: 'male',
+    //   ),
+    // );
 
-    BlocProvider.of<MyCubit>(context).emitCreateNewUser(
-      User(
-        name: 'Ahmed Mohamed',
-        email: 'Ahmed.mohamed@gmail.com',
-        status: 'active',
-        gender: 'male',
-      ),
-    );
+    BlocProvider.of<MyCubit>(context).emitDeleteUser('7343349');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home Screen')),
-      body:  Column(
+      body: Column(
         children: [
           // BlocBuilder<MyCubit, MyState>(
           //   builder: (context, state) {
@@ -81,17 +82,35 @@ class _HomeScreenState extends State<HomeScreen> {
           //     }
           //   },
           // ),
-            BlocBuilder<MyCubit, MyState>(
+          //   BlocBuilder<MyCubit, MyState>(
+          //   builder: (context, state) {
+          //     if (state is CreateNewUser) {
+          //       user = (state).newUser;
+          //      return Container(
+          //             height: 50,
+          //             color: Colors.amberAccent,
+          //             child: Center(
+          //               child: Text(user.name.toString()),
+          //             ),
+          //           );
+          //     } else {
+          //       return const Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     }
+          //   },
+          // ),
+          BlocBuilder<MyCubit, MyState>(
             builder: (context, state) {
-              if (state is CreateNewUser) {
-                user = (state).newUser;
-               return Container(
-                      height: 50,
-                      color: Colors.amberAccent,
-                      child: Center(
-                        child: Text(user.name.toString()),
-                      ),
-                    );
+              if (state is DeleteUser) {
+                // user = (state).data;
+                return Container(
+                  height: 50,
+                  color: Colors.amberAccent,
+                  child: Center(
+                    child: Text((state).data().toString()),
+                  ),
+                );
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),

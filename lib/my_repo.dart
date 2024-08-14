@@ -16,4 +16,8 @@ class MyRepo {
     return await webServices.createNewUser(newUser,
         'Bearer f2794958cd2abf98b7f5abe6e71efdbe44316040dc3ef820511cf186c434f459');
   }
+   Future<dynamic> deleteUser(String id) async {
+    return await webServices.deleteUser(id,
+        'Bearer f2794958cd2abf98b7f5abe6e71efdbe44316040dc3ef820511cf186c434f459');
+  }
 }
