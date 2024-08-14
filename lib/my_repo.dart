@@ -5,15 +5,15 @@ class MyRepo {
   final WebServices webServices;
   MyRepo(this.webServices);
   Future<List<User>> getAllUsers() async {
-    var response = await webServices.getAllUsers();
-    return response
-        .map((singleUserDataFromJson) =>
-            User.fromJson(singleUserDataFromJson.toJson()))
-        .toList();
+    return await webServices.getAllUsers();
   }
 
   Future<User> getUserById(int userId) async {
-    var response = await webServices.getUserById(userId);
-    return User.fromJson(response.toJson());
+    return await webServices.getUserById(userId);
+  }
+
+  Future<User> createNewUser(User newUser) async {
+    return await webServices.createNewUser(newUser,
+        'Bearer f2794958cd2abf98b7f5abe6e71efdbe44316040dc3ef820511cf186c434f459');
   }
 }
