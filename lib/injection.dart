@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:handling_apis_flutter/cubit/my_cubit.dart';
-import 'package:handling_apis_flutter/my_repo.dart';
-import 'package:handling_apis_flutter/web_services.dart';
+import 'cubit/my_cubit.dart';
+import 'my_repo.dart';
+import 'web_services.dart';
 
 final getIt = GetIt.instance;
 

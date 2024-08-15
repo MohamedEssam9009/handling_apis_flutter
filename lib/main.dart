@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handling_apis_flutter/cubit/my_cubit.dart';
-import 'package:handling_apis_flutter/home_screen.dart';
-import 'package:handling_apis_flutter/injection.dart';
+import 'cubit/my_cubit.dart';
+import 'home_screen.dart';
+import 'injection.dart';
 
 void main() {
   initGetIt();

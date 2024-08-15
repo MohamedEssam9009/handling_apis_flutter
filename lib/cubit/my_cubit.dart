@@ -1,35 +1,46 @@
 import 'package:bloc/bloc.dart';
-import 'package:handling_apis_flutter/my_repo.dart';
-import 'package:handling_apis_flutter/user.dart';
-import 'package:meta/meta.dart';
+import '../network_exceptions.dart';
+import 'result_state.dart';
+import '../my_repo.dart';
+import '../user.dart';
 
-part 'my_state.dart';
-
-class MyCubit extends Cubit<MyState> {
+class MyCubit extends Cubit<ResultState<User>> {
   final MyRepo myRepo;
 
-  MyCubit(this.myRepo) : super(MyInitial());
+  MyCubit(this.myRepo) : super(const Idle());
 
-  void emitGetAllUsers(List<User> allUsersList) {
-    myRepo.getAllUsers().then((usersList) {
-      emit(GetAllUsers(usersList));
+  // void emitGetAllUsers(List<User> allUsersList) async {
+  //   var data = await myRepo.getAllUsers();
+  //   data.when(success: (List<User> allUsers) {
+  //     emit(ResultState.success(allUsers));
+  //   }, failure: (NetworkExceptions networkExceptions) {
+  //     emit(ResultState.error(networkExceptions));
+  //   });
+
+ 
+  // }
+
+  // void emitGetUserDetails(int userId) {
+  //   myRepo.getUserById(userId).then((userDetails) {
+  //     emit(GetUserDetails(userDetails));
+  //   });
+  // }
+
+  void emitCreateNewUser(User newUser)async {
+
+var data = await myRepo.createNewUser(newUser);
+    data.when(success: (User newUser) {
+      emit(ResultState.success(newUser));
+    }, failure: (NetworkExceptions networkExceptions) {
+      emit(ResultState.error(networkExceptions));
     });
+    
+ 
   }
 
-  void emitGetUserDetails(int userId) {
-    myRepo.getUserById(userId).then((userDetails) {
-      emit(GetUserDetails(userDetails));
-    });
-  }
-  void emitCreateNewUser(User newUser) {
-    myRepo.createNewUser(newUser).then((newUser) {
-      emit(CreateNewUser(newUser));
-    });
-  }
-
-  void emitDeleteUser(String id) {
-    myRepo.deleteUser(id).then((data) {
-      emit(DeleteUser(data));
-    });
-  }
+  // void emitDeleteUser(String id) {
+  //   myRepo.deleteUser(id).then((data) {
+  //     emit(DeleteUser(data));
+  //   });
+  // }
 }
